@@ -40,8 +40,17 @@ export const getTrips = (): any | null => {
 export const clearTrip = () => {
   storage.delete("trips");
 };
- 
-export const clearAllTrips = () => {
-  storage.delete("trips");
-  console.log('✅ All trips cleared from storage');
+
+// Generic data storage for temporary trip data
+export const saveData = (key: string, data: any) => {
+  storage.set(key, JSON.stringify(data));
+};
+
+export const getData = (key: string): any | null => {
+  const data = storage.getString(key);
+  return data ? JSON.parse(data) : null;
+};
+
+export const clearData = (key: string) => {
+  storage.delete(key);
 };
